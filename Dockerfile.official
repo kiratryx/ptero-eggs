@@ -1,0 +1,20 @@
+FROM php:8.4-fpm-alpine
+
+RUN apk --update --no-cache add curl ca-certificates nginx
+
+ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN install-php-extensions exif soap gmp zip mysqli pdo_mysql pdo_pgsql bcmath gd bz2 gettext pdo_odbc pdo_dblib
+
+RUN ln -s /usr/local/sbin/php-fpm /usr/sbin/php-fpm84
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN adduser -D -h /home/container container
+USER container
+ENV USER container
+ENV HOME /home/container
+
+WORKDIR /home/container
+COPY ./entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT []
+CMD ["/bin/ash", "/entrypoint.sh"]
