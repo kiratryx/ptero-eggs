@@ -22,11 +22,11 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           context: ./
-          file: ./Dockerfile
+          file: ./Dockerfile.official
           platforms: linux/amd64,linux/arm64
           push: true
           pull: true
           no-cache: true
           tags: ghcr.io/kiratryx/nginx-ptero:8.4
       - name: Show PHP version
-        run: docker run --rm --user root ghcr.io/kiratryx/nginx-ptero:8.4 php84 -v
+        run: docker run --rm --user root ghcr.io/kiratryx/nginx-ptero:8.4 php -v
