@@ -27,6 +27,6 @@ jobs:
           push: true
           pull: true
           no-cache: true
-          tags: ghcr.io/kiratryx/nginx-ptero:8.4-test
+          tags: ghcr.io/kiratryx/nginx-ptero:8.4
       - name: Show PHP version
-        run: docker run --rm --user root ghcr.io/kiratryx/nginx-ptero:8.4-test php84 -v
+        run: docker run --rm --user root ghcr.io/kiratryx/nginx-ptero:8.4 php84 -v
